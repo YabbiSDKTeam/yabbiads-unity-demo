@@ -10,59 +10,35 @@
 		</data>
 		<key>Headers/YabbiSdk-Swift.h</key>
 		<data>
-		WaIHuY/njJQHTay8ty3TiGaJiPY=
+		Aq+Mi98JqwWuhkArAyWXvXDYdUo=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		uj1060lVLOP6tryvHlWcV9nKbUI=
+		9WWqxtVF0CzrebqFoS3BlyZaljs=
 		</data>
-		<key>Modules/YabbiSdk.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
+		<key>Modules/YabbiSdk.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo</key>
 		<data>
-		jlsd0Rp3pMPV0n11b6ROnn1SY08=
+		45O3GN3U3TQxk1RhnvdjYROdjGY=
 		</data>
 		<key>Modules/YabbiSdk.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<data>
-		jlsd0Rp3pMPV0n11b6ROnn1SY08=
+		45O3GN3U3TQxk1RhnvdjYROdjGY=
 		</data>
-		<key>Modules/YabbiSdk.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
+		<key>Modules/YabbiSdk.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		cx2wbFYoJfXjePCe4ohX2IBs8vQ=
+		wukBSeUz0SDNy1qrVcTuKxyJkDg=
 		</data>
-		<key>Modules/YabbiSdk.swiftmodule/Project/x86_64.swiftsourceinfo</key>
+		<key>Modules/YabbiSdk.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		cx2wbFYoJfXjePCe4ohX2IBs8vQ=
-		</data>
-		<key>Modules/YabbiSdk.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
-		<data>
-		reyiuIFcSn+2sgeHoWNfOiuJHRg=
-		</data>
-		<key>Modules/YabbiSdk.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
-		<data>
-		HKQcwGILRirZC9hW/u/RVCTVyKg=
+		/dLWBHnbKrrqSMGZgphkjA4TpCQ=
 		</data>
 		<key>Modules/YabbiSdk.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		reyiuIFcSn+2sgeHoWNfOiuJHRg=
+		wukBSeUz0SDNy1qrVcTuKxyJkDg=
 		</data>
 		<key>Modules/YabbiSdk.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		HKQcwGILRirZC9hW/u/RVCTVyKg=
-		</data>
-		<key>Modules/YabbiSdk.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
-		<data>
-		9JrO8JtPKqXZKS+tTlGXt0Ty9A8=
-		</data>
-		<key>Modules/YabbiSdk.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
-		<data>
-		ERVMDipHdAPUERq+MEy7MRKnX9M=
-		</data>
-		<key>Modules/YabbiSdk.swiftmodule/x86_64.swiftdoc</key>
-		<data>
-		9JrO8JtPKqXZKS+tTlGXt0Ty9A8=
-		</data>
-		<key>Modules/YabbiSdk.swiftmodule/x86_64.swiftmodule</key>
-		<data>
-		ERVMDipHdAPUERq+MEy7MRKnX9M=
+		/dLWBHnbKrrqSMGZgphkjA4TpCQ=
 		</data>
 		<key>Yabbi.storyboardc/Info.plist</key>
 		<data>
@@ -78,7 +54,7 @@
 		</data>
 		<key>player.html</key>
 		<data>
-		hkrfs5WD2zwcIWuSHXiA1xC2ne0=
+		IV1hAVfpsodcjjDs9tYnw5LGtLQ=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -94,91 +70,49 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			nISItl3as6ODXBn/VMEcOsAA7/iCTDvOlb6B1Vg7sj8=
+			1MfCyvGZyrlouYeF+0zw7eC3pjRYBQQL+1QG53RTY1w=
 			</data>
 		</dict>
-		<key>Modules/YabbiSdk.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
+		<key>Modules/YabbiSdk.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			C0dcYjtqvlrtHmXhqB3GqnNNUmYtV4SZ2YKXrS7l8V0=
+			FknKCR9vXxVfBiTXlzp0DgDXy3m1yFmBzpzABIQJkg4=
 			</data>
 		</dict>
 		<key>Modules/YabbiSdk.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			C0dcYjtqvlrtHmXhqB3GqnNNUmYtV4SZ2YKXrS7l8V0=
+			FknKCR9vXxVfBiTXlzp0DgDXy3m1yFmBzpzABIQJkg4=
 			</data>
 		</dict>
-		<key>Modules/YabbiSdk.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
+		<key>Modules/YabbiSdk.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Nk8UjdB+Qe2DvdkF5kx0d1USMPlCToW5bQd9lb2rUR4=
+			WjVfCrMtCG7CAMSKrxWARwfQGwZhPMbr0p7s6d2gcjU=
 			</data>
 		</dict>
-		<key>Modules/YabbiSdk.swiftmodule/Project/x86_64.swiftsourceinfo</key>
+		<key>Modules/YabbiSdk.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Nk8UjdB+Qe2DvdkF5kx0d1USMPlCToW5bQd9lb2rUR4=
-			</data>
-		</dict>
-		<key>Modules/YabbiSdk.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			KHqjwyDcduETHcugpxJTT90sPLE6bUiXcR9aSXDq9E8=
-			</data>
-		</dict>
-		<key>Modules/YabbiSdk.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			/H67Hjg7NBtzS5LoXW6Q3wJBrQl0vzdOQdasne6furk=
+			FCRviR3CJ764NuVn658EvIEZxO4KBTVHHmu7+aRIkvk=
 			</data>
 		</dict>
 		<key>Modules/YabbiSdk.swiftmodule/arm64.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			KHqjwyDcduETHcugpxJTT90sPLE6bUiXcR9aSXDq9E8=
+			WjVfCrMtCG7CAMSKrxWARwfQGwZhPMbr0p7s6d2gcjU=
 			</data>
 		</dict>
 		<key>Modules/YabbiSdk.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			/H67Hjg7NBtzS5LoXW6Q3wJBrQl0vzdOQdasne6furk=
-			</data>
-		</dict>
-		<key>Modules/YabbiSdk.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			AX5HoWrAErZFMy2NhBgk8st9B+Afxk29od3U9hxRWhk=
-			</data>
-		</dict>
-		<key>Modules/YabbiSdk.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			1oYNwJP7Vfxjec/RmlEfy85Gxm1ORVr0gxasDk7nqLo=
-			</data>
-		</dict>
-		<key>Modules/YabbiSdk.swiftmodule/x86_64.swiftdoc</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			AX5HoWrAErZFMy2NhBgk8st9B+Afxk29od3U9hxRWhk=
-			</data>
-		</dict>
-		<key>Modules/YabbiSdk.swiftmodule/x86_64.swiftmodule</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			1oYNwJP7Vfxjec/RmlEfy85Gxm1ORVr0gxasDk7nqLo=
+			FCRviR3CJ764NuVn658EvIEZxO4KBTVHHmu7+aRIkvk=
 			</data>
 		</dict>
 		<key>Yabbi.storyboardc/Info.plist</key>
@@ -206,7 +140,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			xyM/nmcbDXoJvtBO61z/0cJYGMsSDfg4J0W5f9lVRSU=
+			9reIA3NMmTNeCnRTXll27rU1+vzKwo7TPAhGIUsFx54=
 			</data>
 		</dict>
 	</dict>
