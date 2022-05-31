@@ -10,18 +10,20 @@ namespace YabbiAds.Platform.Android
         private readonly IInterstitialAdListener _listener;
 
         internal YabbiAdsInterstitialCallbacks(IInterstitialAdListener listener) : base(YabbiAdsConstants
-            .YabbiAdEventsClassName)
+            .YabbiAdsInterstitialCallbacks)
         {
             _listener = listener;
         }
 
-        private void onLoad() => _listener.OnInterstitialLoaded();
+        private void onInterstitialLoaded() => _listener.OnInterstitialLoaded();
 
-        private void onFail(string error) => _listener.OnInterstitialFailed(error);
+        private void onInterstitialLoadFail(string error) => _listener.OnInterstitialFailed(error);
 
-        private void onShow() => _listener.OnInterstitialShown();
+        private void onInterstitialShowFailed(string error) => _listener.OnInterstitialFailed(error);
 
-        public void onClose() => _listener.OnInterstitialClosed();
+        private void onInterstitialShown() => _listener.OnInterstitialShown();
+
+        public void onInterstitialClosed() => _listener.OnInterstitialClosed();
     }
 #else
     {

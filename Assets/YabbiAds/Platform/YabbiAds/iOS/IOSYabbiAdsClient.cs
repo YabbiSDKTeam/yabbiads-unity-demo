@@ -1,4 +1,4 @@
-#if UNITY_IPHONE || UNITY_EDITOR
+#if UNITY_IPHONE
 using AOT;
 using YabbiAds.Common;
 
@@ -16,44 +16,52 @@ namespace YabbiAds.Platform.iOS
 
         #endregion
 
-
         private static IInterstitialAdListener _interstitialAdListener;
-        private static IVideoAdListener _videoAdListener;
+        private static IRewardedAdListener _rewardedAdListener;
 
+        private static YabbiConfiguration _configuration;
 
-        public void Initialize(string publisherID)
+        public void Initialize(YabbiConfiguration configuration)
         {
-            YabbiAdsObjCBridge.YabbiInitialize(publisherID);
+            _configuration = configuration;
+            YabbiAdsObjCBridge.YabbiInitialize(_configuration.PublisherID);
+            YabbiAdsObjCBridge.YabbiInitializeAd( _configuration.InterstitialID, YabbiAdsType.Interstitial);
+            YabbiAdsObjCBridge.YabbiInitializeAd(_configuration.RewardedID, YabbiAdsType.Rewarded);
         }
 
-        public void InitializeAd(string unitID, int type)
+        public bool IsInitialized()
         {
-            YabbiAdsObjCBridge.YabbiInitializeAd(unitID, type);
+            return _configuration?.PublisherID != null;
         }
 
-        public bool IsAdInitialized(int adType)
+        public bool CanLoadAd(int adType)
         {
-            return YabbiAdsObjCBridge.YabbiIsAdInitialized(adType);
+            return YabbiAdsObjCBridge.YabbiIsAdInitialized(GetIosAdType(adType));
         }
 
         public void ShowAd(int adType)
         {
-            YabbiAdsObjCBridge.YabbiShowAd(adType);
+            YabbiAdsObjCBridge.YabbiShowAd(GetIosAdType(adType));
         }
 
         public bool IsAdLoaded(int adType)
         {
-            return YabbiAdsObjCBridge.YabbiIsAdLoaded(adType);
+            return YabbiAdsObjCBridge.YabbiIsAdLoaded(GetIosAdType(adType));
         }
 
         public void LoadAd(int adType)
         {
-            YabbiAdsObjCBridge.YabbiLoadAd(adType);
+            YabbiAdsObjCBridge.YabbiLoadAd(GetIosAdType(adType));
+        }
+
+        private static int GetIosAdType(int adType)
+        {
+            return adType == 3 ? 2 : adType;
         }
 
         public void SetAlwaysRequestLocation(int adType, bool isEnabled)
         {
-            YabbiAdsObjCBridge.YabbiSetAlwaysRequestLocation(adType, isEnabled);
+            YabbiAdsObjCBridge.YabbiSetAlwaysRequestLocation(GetIosAdType(adType), isEnabled);
         }
 
         public void SetInterstitialCallbacks(IInterstitialAdListener adListener)
@@ -67,9 +75,9 @@ namespace YabbiAds.Platform.iOS
             );
         }
 
-        public void SetVideoCallbacks(IVideoAdListener adListener)
+        public void SetRewardedCallbacks(IRewardedAdListener adListener)
         {
-            _videoAdListener = adListener;
+            _rewardedAdListener = adListener;
             YabbiAdsObjCBridge.YabbiSetVideoDelegate(
                 OnVideoLoaded,
                 OnVideoShown,
@@ -117,31 +125,31 @@ namespace YabbiAds.Platform.iOS
         [MonoPInvokeCallback(typeof(YabbiVideoCallbacks))]
         internal static void OnVideoLoaded()
         {
-            _videoAdListener?.OnVideoLoaded();
+            _rewardedAdListener?.OnRewardedLoaded();
         }
 
         [MonoPInvokeCallback(typeof(YabbiVideoCallbacks))]
         internal static void OnVideoShown()
         {
-            _videoAdListener?.OnVideoShown();
+            _rewardedAdListener?.OnRewardedShown();
         }
 
         [MonoPInvokeCallback(typeof(YabbiVideoCallbacks))]
         internal static void OnVideoClosed()
         {
-            _videoAdListener?.OnVideoClosed();
+            _rewardedAdListener?.OnRewardedClosed();
         }
 
         [MonoPInvokeCallback(typeof(YabbiVideoCallbacks))]
         internal static void OnVideoFinished()
         {
-            _videoAdListener?.OnVideoFinished();
+            _rewardedAdListener?.OnRewardedFinished();
         }
 
         [MonoPInvokeCallback(typeof(YabbiVideoFailedCallbacks))]
         internal static void OnVideoFailed(string message)
         {
-            _videoAdListener?.OnVideoFailed(message);
+            _rewardedAdListener?.OnRewardedFailed(message);
         }
 
         #endregion

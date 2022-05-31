@@ -1,4 +1,4 @@
-#if UNITY_ANDROID || UNITY_EDITOR
+#if UNITY_ANDROID
 using UnityEngine;
 using YabbiAds.Common;
 
@@ -8,52 +8,24 @@ namespace YabbiAds.Platform.Android
     {
         private AndroidJavaObject _activity;
 
-        private string _publisherID;
 
-        private AndroidJavaObject _videoAdContainer;
-        private AndroidJavaObject _interstitialAdContainer;
-        
-        private static IInterstitialAdListener _interstitialAdListener;
-        private static IVideoAdListener _videoAdListener;
+        private AndroidJavaClass _yabbiAdsClass;
 
-        #region Singleton
-
-        private AndroidYabbiAdsClient()
+        private AndroidJavaClass GetYabbiAdsClass()
         {
+            return _yabbiAdsClass ??= new AndroidJavaClass(YabbiAdsConstants.YabbiAds);
         }
 
-        public static AndroidYabbiAdsClient Instance { get; } = new AndroidYabbiAdsClient();
-
-        #endregion
-
-        public void Initialize(string publisherID)
+        public void Initialize(YabbiConfiguration configuration)
         {
-            _publisherID = publisherID;
+            var  androidConfig =new AndroidJavaObject(YabbiAdsConstants.YabbiConfiguration,
+                configuration.PublisherID,  configuration.InterstitialID, configuration.RewardedID);
+            GetYabbiAdsClass().CallStatic("initialize", androidConfig);
         }
 
-        public void InitializeAd(string unitID, int adType)
+        public bool IsInitialized()
         {
-            switch (adType)
-            {
-                case YabbiAdsType.Interstitial:
-                    _interstitialAdContainer = new AndroidJavaObject(YabbiAdsConstants.InterstitialAdContainerClassName,
-                        GetActivity(), _publisherID, unitID);
-                    break;
-                case YabbiAdsType.Video:
-                    _videoAdContainer = new AndroidJavaObject(YabbiAdsConstants.VideoAdContainerClassName,
-                        GetActivity(), _publisherID, unitID);
-                    break;
-            }
-        }
-
-        private AndroidJavaObject GetAdByType(int adType)
-        {
-            return adType switch
-            {
-                YabbiAdsType.Interstitial => _interstitialAdContainer,
-                YabbiAdsType.Video => _videoAdContainer,
-                _ => null
-            };
+           return GetYabbiAdsClass().CallStatic<bool>("isInitialized");
         }
 
         private AndroidJavaObject GetActivity()
@@ -72,61 +44,41 @@ namespace YabbiAds.Platform.Android
             return boolean;
         }
 
-        public bool IsAdInitialized(int adType)
+        public bool CanLoadAd(int adType)
         {
-            return adType switch
-            {
-                YabbiAdsType.Interstitial => _interstitialAdContainer != null && _interstitialAdListener != null,
-                YabbiAdsType.Video => _videoAdContainer != null && _videoAdListener != null,
-                _ => false
-            };
+            return GetYabbiAdsClass().CallStatic<bool>("canLoadAd", adType);
         }
 
-        public void ShowAd(int adType) => GetAdByType(adType)?.Call("show");
+        public void ShowAd(int adType)
+        {
+            GetYabbiAdsClass().CallStatic("showAd",GetActivity(), adType);
+        }
 
         public bool IsAdLoaded(int adType)
         {
-            var container = GetAdByType(adType);
-            return container != null && container.Call<bool>("isLoaded");
+            return GetYabbiAdsClass().CallStatic<bool>("isAdLoaded", adType);
         }
 
         public void LoadAd(int adType)
         {
-            switch (adType)
-            {
-                case YabbiAdsType.Interstitial:
-                    _interstitialAdContainer?.Call("load", new YabbiAdsInterstitialCallbacks(_interstitialAdListener));
-                    break;
-                case YabbiAdsType.Video:
-                    _videoAdContainer?.Call("load", new YabbiAdsVideoCallbacks(_videoAdListener));
-                    break;
-            }
+             GetYabbiAdsClass().CallStatic("loadAd",GetActivity(), adType);
         }
 
-        public void SetAlwaysRequestLocation(int adType, bool isEnabled) =>
-            GetAdByType(adType)?.Call("setAlwaysRequestLocation", BoolToAndroid(isEnabled));
-
+        public void SetAlwaysRequestLocation(int adType, bool isEnabled) {}
+        
         public void SetInterstitialCallbacks(IInterstitialAdListener adListener)
         {
-            _interstitialAdListener = adListener;
+            GetYabbiAdsClass().CallStatic("setInterstitialCallbacks", new YabbiAdsInterstitialCallbacks(adListener));
         }
 
-        public void SetVideoCallbacks(IVideoAdListener adListener)
+        public void SetRewardedCallbacks(IRewardedAdListener adListener)
         {
-            _videoAdListener = adListener;
+            GetYabbiAdsClass().CallStatic("setRewardedCallbacks", new YabbiAdsRewardedCallbacks(adListener));
         }
 
         public void DestroyAd(int adType)
         {
-            switch (adType)
-            {
-                case YabbiAdsType.Interstitial:
-                    _interstitialAdContainer = null;
-                    break;
-                case YabbiAdsType.Video:
-                    _videoAdContainer = null;
-                    break;
-            }
+            GetYabbiAdsClass().CallStatic("destroyAd", adType);
         }
     }
 }

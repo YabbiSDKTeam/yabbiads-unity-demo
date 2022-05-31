@@ -1,3 +1,4 @@
+using System;
 using YabbiAds.Common;
 using YabbiAds.Platform.Factory;
 
@@ -12,19 +13,20 @@ namespace YabbiAds.Api
             return _client ??= YabbiAdsClientFactory.GetYabbiAdsClient();
         }
 
-        public static void Initialize(string publisherID)
+        public static void Initialize(YabbiConfiguration configuration)
         {
-            GetInstance().Initialize(publisherID);
+            GetInstance().Initialize(configuration);
         }
-
-        public static void InitializeAd(string unitID, int adType)
+        
+        public static bool IsInitialized()
         {
-            GetInstance().InitializeAd(unitID, adType);
+           return GetInstance().IsInitialized();
         }
+        
 
-        public static bool IsAdInitialized(int adType)
+        public static bool CanLoadAd(int adType)
         {
-            return GetInstance().IsAdInitialized(adType);
+            return GetInstance().CanLoadAd(adType);
         }
 
         public static void ShowAd(int adType)
@@ -41,7 +43,8 @@ namespace YabbiAds.Api
         {
             GetInstance().LoadAd(adType);
         }
-
+        
+        [Obsolete("Method is deprecated, it will be removed in the next version and it doesn't work on android anymore.")]
         public static void SetAlwaysRequestLocation(int adType, bool isEnabled)
         {
             GetInstance().SetAlwaysRequestLocation(adType, isEnabled);
@@ -52,9 +55,9 @@ namespace YabbiAds.Api
             GetInstance().SetInterstitialCallbacks(adListener);
         }
 
-        public static void SetVideoCallbacks(IVideoAdListener adListener)
+        public static void SetRewardedCallbacks(IRewardedAdListener adListener)
         {
-            GetInstance().SetVideoCallbacks(adListener);
+            GetInstance().SetRewardedCallbacks(adListener);
         }
 
         public static void DestroyAd(int adType)

@@ -1,11 +1,12 @@
 using System;
 using UnityEngine;
+using UnityEngine.Android;
 using UnityEngine.UI;
 using YabbiAds.Api;
 using YabbiAds.Common;
 
 
-public class YabbiAdsDemo : MonoBehaviour, IInterstitialAdListener, IVideoAdListener
+public class YabbiAdsDemo : MonoBehaviour, IInterstitialAdListener, IRewardedAdListener
 {
     public Text logger;
     public InputField pubIDField;
@@ -16,14 +17,14 @@ public class YabbiAdsDemo : MonoBehaviour, IInterstitialAdListener, IVideoAdList
 
     private const string PubID = "INSERT_YOUR_ID";
     private const string InterstitialID = "INSERT_YOUR_ID";
-    private const string VideoID = "INSERT_YOUR_ID";
+    private const string RewardedID = "INSERT_YOUR_ID";
 
 
     private void Start()
     {
         pubIDField.text = PubID;
         interstitialIDField.text = InterstitialID;
-        videoIDField.text = VideoID;
+        videoIDField.text = RewardedID;
 
 
         RestartContainers();
@@ -35,14 +36,12 @@ public class YabbiAdsDemo : MonoBehaviour, IInterstitialAdListener, IVideoAdList
         {
             Destroy();
 
-            Yabbi.Initialize(PubID);
-
-            Yabbi.InitializeAd(InterstitialID, YabbiAdsType.Interstitial);
-            Yabbi.InitializeAd(VideoID, YabbiAdsType.Video);
+            var configuration = new YabbiConfiguration(PubID, InterstitialID, RewardedID);
+            Yabbi.Initialize(configuration);
             Yabbi.SetInterstitialCallbacks(this);
-            Yabbi.SetVideoCallbacks(this);
+            Yabbi.SetRewardedCallbacks(this);
 
-            WriteNewLog($"PubID: {PubID}\nInterstitialID: {InterstitialID}\nVideoID: {VideoID}");
+            WriteNewLog($"PubID: {PubID}\nInterstitialID: {InterstitialID}\nRewardedID: {RewardedID}");
         }
         catch (Exception e)
         {
@@ -53,20 +52,21 @@ public class YabbiAdsDemo : MonoBehaviour, IInterstitialAdListener, IVideoAdList
     private void Destroy()
     {
         Yabbi.DestroyAd(YabbiAdsType.Interstitial);
-        Yabbi.DestroyAd(YabbiAdsType.Video);
+        Yabbi.DestroyAd(YabbiAdsType.Rewarded);
     }
 
 
     public void StartInterstitialBanner()
     {
-        WriteNewLog("InterstitialAdContainer | load");
         Yabbi.LoadAd(YabbiAdsType.Interstitial);
+        WriteNewLog("InterstitialAd | load");
     }
 
-    public void StartVideoBanner()
+    public void StartRwardedBanner()
     {
-        WriteNewLog("VideoAdContainer | load");
-        Yabbi.LoadAd(YabbiAdsType.Video);
+        Yabbi.LoadAd(YabbiAdsType.Rewarded);
+        WriteNewLog("RewardedAd | load");
+
     }
 
     private void WriteNewLog(string message, bool restart = true)
@@ -84,48 +84,48 @@ public class YabbiAdsDemo : MonoBehaviour, IInterstitialAdListener, IVideoAdList
 
     public void OnInterstitialLoaded()
     {
-        WriteNewLog("InterstitialAdContainer | onLoad", false);
+        WriteNewLog("OnInterstitialLoaded", false);
         Yabbi.ShowAd(YabbiAdsType.Interstitial);
     }
 
     public void OnInterstitialFailed(string error)
     {
-        WriteNewLog($"InterstitialAdContainer | onFail | {error}", false);
+        WriteNewLog($"OnInterstitialFailed: {error}", false);
     }
 
     public void OnInterstitialShown()
     {
-        WriteNewLog($"InterstitialAdContainer | onShow", false);
+        WriteNewLog($"OnInterstitialShown", false);
     }
 
     public void OnInterstitialClosed()
     {
-        WriteNewLog($"InterstitialAdContainer | onClose", false);
+        WriteNewLog($"OnInterstitialClosed", false);
     }
 
-    public void OnVideoLoaded()
+    public void OnRewardedLoaded()
     {
-        WriteNewLog($"VideoAdContainer | onLoad", false);
-        Yabbi.ShowAd(YabbiAdsType.Video);
+        WriteNewLog($"OnRewardedLoaded", false);
+        Yabbi.ShowAd(YabbiAdsType.Rewarded);
     }
 
-    public void OnVideoFailed(string error)
+    public void OnRewardedFailed(string error)
     {
-        WriteNewLog($"VideoAdContainer | onFail | {error}", false);
+        WriteNewLog($"OnRewardedFailed: {error}", false);
     }
 
-    public void OnVideoShown()
+    public void OnRewardedShown()
     {
-        WriteNewLog($"VideoAdContainer | onShow", false);
+        WriteNewLog($"OnRewardedShown", false);
     }
 
-    public void OnVideoFinished()
+    public void OnRewardedFinished()
     {
-        WriteNewLog($"VideoAdContainer | onFinish", false);
+        WriteNewLog($"OnRewardedFinished", false);
     }
 
-    public void OnVideoClosed()
+    public void OnRewardedClosed()
     {
-        WriteNewLog($"VideoAdContainer | onClose", false);
+        WriteNewLog($"OnRewardedClosed", false);
     }
 }

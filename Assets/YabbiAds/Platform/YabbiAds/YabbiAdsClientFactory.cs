@@ -1,7 +1,7 @@
 using YabbiAds.Common;
-#if UNITY_ANDROID && !UNITY_EDITOR
+#if UNITY_ANDROID
 using YabbiAds.Platform.Android;
-#elif UNITY_IPHONE && !UNITY_EDITOR
+#elif UNITY_IPHONE
 using YabbiAds.Platform.iOS;
 #else
 using YabbiAds.Platform.Dummy;
@@ -14,9 +14,9 @@ namespace YabbiAds.Platform.Factory
     {
         internal static IYabbiAdsClient GetYabbiAdsClient()
         {
-#if UNITY_ANDROID && !UNITY_EDITOR
-			return AndroidYabbiAdsClient.Instance;
-#elif UNITY_IPHONE && !UNITY_EDITOR
+#if UNITY_ANDROID
+			return new AndroidYabbiAdsClient();
+#elif UNITY_IPHONE
 			return IOSYabbiAdsClient.Instance;
 #else
             return new DummyClient();

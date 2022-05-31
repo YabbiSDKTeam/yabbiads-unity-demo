@@ -1,18 +1,11 @@
 <dependencies>
   <packages>
-    <package>androidx.appcompat:appcompat:1.4.1</package>
-    <package>com.android.support.constraint:constraint-layout:1.1.3</package>
-    <package>com.google.android.gms:play-services-ads-identifier:18.0.1</package>
-    <package>com.google.android.gms:play-services-location:19.0.1</package>
-    <package>com.squareup.okhttp3:okhttp:5.0.0-alpha.6</package>
-    <package>io.reactivex.rxjava2:rxandroid:2.1.1</package>
-    <package>io.reactivex.rxjava2:rxjava:2.2.21</package>
-    <package>org.greenrobot:eventbus:3.3.1</package>
+    <package>me.yabbi.ads:sdk:2.0.0</package>
   </packages>
   <files />
   <settings>
     <setting name="androidAbis" value="armeabi-v7a" />
-    <setting name="bundleId" value="me.yabbi.ads" />
+    <setting name="bundleId" value="me.yabbi.demo" />
     <setting name="explodeAars" value="True" />
     <setting name="gradleBuildEnabled" value="True" />
     <setting name="gradlePropertiesTemplateEnabled" value="True" />

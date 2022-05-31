@@ -7,25 +7,26 @@ namespace YabbiAds.Platform.Dummy
     {
         #region YabbiAds
 
-        public void Initialize(string publisherId)
+        public void Initialize(YabbiConfiguration configuration)
         {
-            DebugLog("YabbiAds.initialize");
+            DebugLog("YabbiAds.Initialize");
         }
 
-        public void InitializeAd(string unitId, int adType)
+        public bool IsInitialized()
         {
-            DebugLog("YabbiAds.InitializeAdContainer");
+            DebugLog("YabbiAds.IsInitialized");
+            return false;
         }
 
-        public bool IsAdInitialized(int adType)
+        public bool CanLoadAd(int adType)
         {
-            DebugLog("YabbiAds.isInitialized");
+            DebugLog("YabbiAds.CanLoadAd");
             return false;
         }
 
         public void ShowAd(int adType)
         {
-            DebugLog("YabbiAds.show");
+            DebugLog("YabbiAds.ShowAd");
         }
 
         public bool IsAdLoaded(int adType)
@@ -36,7 +37,7 @@ namespace YabbiAds.Platform.Dummy
 
         public void LoadAd(int adType)
         {
-            DebugLog("YabbiAds.Load");
+            DebugLog("YabbiAds.LoadAd");
         }
 
         public void SetAlwaysRequestLocation(int adType, bool isEnabled)
@@ -46,17 +47,17 @@ namespace YabbiAds.Platform.Dummy
 
         public void SetInterstitialCallbacks(IInterstitialAdListener adListener)
         {
-            DebugLog("YabbiAds.setInterstitialCallbacks");
+            DebugLog("YabbiAds.SetInterstitialCallbacks");
         }
 
-        public void SetVideoCallbacks(IVideoAdListener adListener)
+        public void SetRewardedCallbacks(IRewardedAdListener adListener)
         {
-            DebugLog("YabbiAds.setVideoCallbacks");
+            DebugLog("YabbiAds.SetRewardedCallbacks");
         }
 
         public void DestroyAd(int adType)
         {
-            DebugLog("YabbiAds.destroy");
+            DebugLog("YabbiAds.DestroyAd");
         }
 
         #endregion

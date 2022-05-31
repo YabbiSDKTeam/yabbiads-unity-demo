@@ -1,4 +1,4 @@
-#if UNITY_IPHONE || UNITY_EDITOR
+#if UNITY_IPHONE
 using System.Runtime.InteropServices;
 
 

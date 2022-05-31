@@ -700,8 +700,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Showcase, Assembly-CSharp
+      - m_Target: {fileID: 1833515689}
+        m_TargetAssemblyTypeName: YabbiAdsDemoShowcase, Assembly-CSharp
         m_MethodName: RestartContainers
         m_Mode: 1
         m_Arguments:
@@ -2138,7 +2138,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1833515689}
         m_TargetAssemblyTypeName: YabbiAdsDemoShowcase, Assembly-CSharp
-        m_MethodName: StartVideoBanner
+        m_MethodName: StartRwardedBanner
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
