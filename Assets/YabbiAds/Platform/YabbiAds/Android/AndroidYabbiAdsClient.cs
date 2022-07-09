@@ -63,8 +63,6 @@ namespace YabbiAds.Platform.Android
         {
              GetYabbiAdsClass().CallStatic("loadAd",GetActivity(), adType);
         }
-
-        public void SetAlwaysRequestLocation(int adType, bool isEnabled) {}
         
         public void SetInterstitialCallbacks(IInterstitialAdListener adListener)
         {

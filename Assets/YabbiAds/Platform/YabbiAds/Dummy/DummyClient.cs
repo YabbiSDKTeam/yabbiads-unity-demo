@@ -40,11 +40,6 @@ namespace YabbiAds.Platform.Dummy
             DebugLog("YabbiAds.LoadAd");
         }
 
-        public void SetAlwaysRequestLocation(int adType, bool isEnabled)
-        {
-            DebugLog("YabbiAds.SetAlwaysRequestLocation");
-        }
-
         public void SetInterstitialCallbacks(IInterstitialAdListener adListener)
         {
             DebugLog("YabbiAds.SetInterstitialCallbacks");
