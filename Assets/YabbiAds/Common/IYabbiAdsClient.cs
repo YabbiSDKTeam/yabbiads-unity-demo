@@ -11,7 +11,6 @@ namespace YabbiAds.Common
         void LoadAd(int adType);
         void ShowAd(int adType);
         bool IsAdLoaded(int adType);
-        public void SetAlwaysRequestLocation(int adType, bool isEnabled);
         void SetInterstitialCallbacks(IInterstitialAdListener adListener);
         void SetRewardedCallbacks(IRewardedAdListener adListener);
         void DestroyAd(int adType);

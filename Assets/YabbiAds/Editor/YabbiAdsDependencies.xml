@@ -1,8 +1,0 @@
-<dependencies>
-  <androidPackages>
-    <androidPackage spec='me.yabbi.ads:sdk:2.0.0'/>
-     <repositories>
-        <repository>https://mobileadx.ru/maven</repository>
-    </repositories>
-  </androidPackages>
-</dependencies>

@@ -1,4 +1,4 @@
-#if UNITY_IPHONE
+#if UNITY_IPHONE && !UNITY_EDITOR
 using AOT;
 using YabbiAds.Common;
 
@@ -24,72 +24,62 @@ namespace YabbiAds.Platform.iOS
         public void Initialize(YabbiConfiguration configuration)
         {
             _configuration = configuration;
-            YabbiAdsObjCBridge.YabbiInitialize(_configuration.PublisherID);
-            YabbiAdsObjCBridge.YabbiInitializeAd( _configuration.InterstitialID, YabbiAdsType.Interstitial);
-            YabbiAdsObjCBridge.YabbiInitializeAd(_configuration.RewardedID, YabbiAdsType.Rewarded);
+            YabbiAdsObjCBridge.YabbiInitialize(_configuration.PublisherID,  _configuration.InterstitialID, _configuration.RewardedID);
         }
 
         public bool IsInitialized()
         {
-            return _configuration?.PublisherID != null;
+            return YabbiAdsObjCBridge.YabbiIsInitialized();
         }
 
         public bool CanLoadAd(int adType)
         {
-            return YabbiAdsObjCBridge.YabbiIsAdInitialized(GetIosAdType(adType));
+            return YabbiAdsObjCBridge.YabbiCanLoadAd(adType);
         }
 
         public void ShowAd(int adType)
         {
-            YabbiAdsObjCBridge.YabbiShowAd(GetIosAdType(adType));
+            YabbiAdsObjCBridge.YabbiShowAd(adType);
         }
 
         public bool IsAdLoaded(int adType)
         {
-            return YabbiAdsObjCBridge.YabbiIsAdLoaded(GetIosAdType(adType));
+            return YabbiAdsObjCBridge.YabbiIsAdLoaded(adType);
         }
 
         public void LoadAd(int adType)
         {
-            YabbiAdsObjCBridge.YabbiLoadAd(GetIosAdType(adType));
+            YabbiAdsObjCBridge.YabbiLoadAd(adType);
         }
-
-        private static int GetIosAdType(int adType)
-        {
-            return adType == 3 ? 2 : adType;
-        }
-
-        public void SetAlwaysRequestLocation(int adType, bool isEnabled)
-        {
-            YabbiAdsObjCBridge.YabbiSetAlwaysRequestLocation(GetIosAdType(adType), isEnabled);
-        }
-
+        
         public void SetInterstitialCallbacks(IInterstitialAdListener adListener)
         {
             _interstitialAdListener = adListener;
             YabbiAdsObjCBridge.YabbiSetInterstitialDelegate(
                 OnInterstitialLoaded,
+                OnInterstitialFailed,
                 OnInterstitialShown,
-                OnVideoClosed,
-                OnInterstitialFailed
+                OnInterstitialFailed,
+                OnInterstitialClosed
             );
         }
 
         public void SetRewardedCallbacks(IRewardedAdListener adListener)
         {
             _rewardedAdListener = adListener;
-            YabbiAdsObjCBridge.YabbiSetVideoDelegate(
-                OnVideoLoaded,
-                OnVideoShown,
-                OnVideoClosed,
-                OnVideoFinished,
-                OnVideoFailed
+            YabbiAdsObjCBridge.YabbiSetRewardedDelegate(
+                OnRewardedVideoLoaded,
+                OnRewardedVideoFailed,
+                OnRewardedVideoShown,
+                OnRewardedVideoFailed,
+                OnRewardedVideoClosed,
+                OnRewardedVideoFinished
             );
         }
 
         public void DestroyAd(int adType)
         {
-            YabbiAdsObjCBridge.YabbiDestroAd(adType);
+            YabbiAdsObjCBridge.YabbiDestroyAd(adType);
         }
 
         #region Intestital Delegate
@@ -112,7 +102,7 @@ namespace YabbiAds.Platform.iOS
             _interstitialAdListener?.OnInterstitialClosed();
         }
 
-        [MonoPInvokeCallback(typeof(YabbiInterstitialFailedCallbacks))]
+        [MonoPInvokeCallback(typeof(YabbiInterstitialFailCallbacks))]
         internal static void OnInterstitialFailed(string message)
         {
             _interstitialAdListener?.OnInterstitialFailed(message);
@@ -122,32 +112,32 @@ namespace YabbiAds.Platform.iOS
 
         #region Video Delegate
 
-        [MonoPInvokeCallback(typeof(YabbiVideoCallbacks))]
-        internal static void OnVideoLoaded()
+        [MonoPInvokeCallback(typeof(YabbiRewardedVideoCallbacks))]
+        internal static void OnRewardedVideoLoaded()
         {
             _rewardedAdListener?.OnRewardedLoaded();
         }
 
-        [MonoPInvokeCallback(typeof(YabbiVideoCallbacks))]
-        internal static void OnVideoShown()
+        [MonoPInvokeCallback(typeof(YabbiRewardedVideoCallbacks))]
+        internal static void OnRewardedVideoShown()
         {
             _rewardedAdListener?.OnRewardedShown();
         }
 
-        [MonoPInvokeCallback(typeof(YabbiVideoCallbacks))]
-        internal static void OnVideoClosed()
+        [MonoPInvokeCallback(typeof(YabbiRewardedVideoCallbacks))]
+        internal static void OnRewardedVideoClosed()
         {
             _rewardedAdListener?.OnRewardedClosed();
         }
 
-        [MonoPInvokeCallback(typeof(YabbiVideoCallbacks))]
-        internal static void OnVideoFinished()
+        [MonoPInvokeCallback(typeof(YabbiRewardedVideoCallbacks))]
+        internal static void OnRewardedVideoFinished()
         {
             _rewardedAdListener?.OnRewardedFinished();
         }
 
-        [MonoPInvokeCallback(typeof(YabbiVideoFailedCallbacks))]
-        internal static void OnVideoFailed(string message)
+        [MonoPInvokeCallback(typeof(YabbiRewardedVideoFailCallbacks))]
+        internal static void OnRewardedVideoFailed(string message)
         {
             _rewardedAdListener?.OnRewardedFailed(message);
         }

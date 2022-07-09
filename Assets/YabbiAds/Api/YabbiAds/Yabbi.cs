@@ -43,12 +43,6 @@ namespace YabbiAds.Api
         {
             GetInstance().LoadAd(adType);
         }
-        
-        [Obsolete("Method is deprecated, it will be removed in the next version and it doesn't work on android anymore.")]
-        public static void SetAlwaysRequestLocation(int adType, bool isEnabled)
-        {
-            GetInstance().SetAlwaysRequestLocation(adType, isEnabled);
-        }
 
         public static void SetInterstitialCallbacks(IInterstitialAdListener adListener)
         {

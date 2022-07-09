@@ -4,59 +4,56 @@ using System.Runtime.InteropServices;
 
 namespace YabbiAds.Platform.iOS
 {
-
     internal delegate void YabbiInterstitialCallbacks();
 
-    internal delegate void YabbiInterstitialFailedCallbacks(string messgae);
+    internal delegate void YabbiInterstitialFailCallbacks(string messgae);
 
-    internal delegate void YabbiVideoCallbacks();
+    internal delegate void YabbiRewardedVideoCallbacks();
 
-    internal delegate void YabbiVideoFailedCallbacks(string message);
-
+    internal delegate void YabbiRewardedVideoFailCallbacks(string message);
 
     internal static class YabbiAdsObjCBridge
     {
         #region Declare external C interface
 
         [DllImport("__Internal")]
-        internal static extern void YabbiInitialize(string publisherID);
-
-        [DllImport("__Internal")]
-        internal static extern void YabbiInitializeAd(string unitID, int adType);
-
+        internal static extern void YabbiInitialize(string publisherID, string interstitialID, string rewardedID);
+        
         [DllImport("__Internal")]
         internal static extern void YabbiLoadAd(int adType);
-
+        
+        [DllImport("__Internal")]
+        internal static extern bool YabbiCanLoadAd(int adType);
+        
         [DllImport("__Internal")]
         internal static extern void YabbiShowAd(int adType);
-
-        [DllImport("__Internal")]
-        internal static extern void YabbiSetAlwaysRequestLocation(int adType, bool isEnabled);
 
         [DllImport("__Internal")]
         internal static extern bool YabbiIsAdLoaded(int adType);
 
         [DllImport("__Internal")]
-        internal static extern bool YabbiIsAdInitialized(int adType);
+        internal static extern bool YabbiIsInitialized();
 
         [DllImport("__Internal")]
-        internal static extern void YabbiDestroAd(int adType);
+        internal static extern void YabbiDestroyAd(int adType);
 
         [DllImport("__Internal")]
         internal static extern void YabbiSetInterstitialDelegate(
             YabbiInterstitialCallbacks onLoaded,
+            YabbiInterstitialFailCallbacks onLoadedFailed,
             YabbiInterstitialCallbacks onShown,
-            YabbiInterstitialCallbacks onClosed,
-           YabbiInterstitialFailedCallbacks onFailed
+            YabbiInterstitialFailCallbacks onShownFailed,
+            YabbiInterstitialCallbacks onClosed
         );
 
         [DllImport("__Internal")]
-        internal static extern void YabbiSetVideoDelegate(
-            YabbiVideoCallbacks onLoaded,
-            YabbiVideoCallbacks onShown,
-            YabbiVideoCallbacks onClosed,
-            YabbiVideoCallbacks onFinished,
-            YabbiVideoFailedCallbacks onFailed
+        internal static extern void YabbiSetRewardedDelegate(
+            YabbiRewardedVideoCallbacks onLoaded,
+            YabbiRewardedVideoFailCallbacks onLoadedFailed,
+            YabbiRewardedVideoCallbacks onShown,
+            YabbiRewardedVideoFailCallbacks onShownFailed,
+            YabbiRewardedVideoCallbacks onClosed,
+            YabbiRewardedVideoCallbacks onFinished
         );
 
         #endregion
